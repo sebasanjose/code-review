@@ -20,14 +20,14 @@ import java.util.stream.Collectors;
 @RequestMapping("/person")
 public class PersonController {
     public final PersonService personService;
-    public final JobRepository _jobRepo;
+    public final JobRepository jobRepo;
 
     @Autowired
     public MetricsService metricsService;
 
     public PersonController(PersonService personService, JobRepository jobRepository){
         this.personService = personService;
-        this._jobRepo = jobRepository;
+        this.jobRepo = jobRepository;
     }
 
     @GetMapping("/metrics")
@@ -75,8 +75,8 @@ public class PersonController {
     @GetMapping("/jobs/{id}")
     public ResponseEntity<List<Job>> getJobsForPerson(@PathVariable Long id){
 
-        System.out.println("Getting " + _jobRepo.findAll().size() + " jobs for " + id);
+        System.out.println("Getting " + jobRepo.findAll().size() + " jobs for " + id);
 
-        return ResponseEntity.ok().body(_jobRepo.findAll().stream().filter(j -> j.getPerson().getId().equals(id)).collect(Collectors.toList()));
+        return ResponseEntity.ok().body(jobRepo.findAll().stream().filter(j -> j.getPerson().getId().equals(id)).collect(Collectors.toList()));
     }
 }

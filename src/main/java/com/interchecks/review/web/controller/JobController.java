@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class JobController {
 
 	private final JobService jobService;
-	private final PersonService personService;
 
 	@PostMapping("{id}")
 	public ResponseEntity<Job> add(@PathVariable("id") Long jobId, @RequestBody Job job) {
